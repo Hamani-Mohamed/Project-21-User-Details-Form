@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Form</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .form-container {
+      background: linear-gradient(130deg, rgb(36, 36, 36) 0%, black 50%);
+      padding: 32px;
+      border: 2px solid gold;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .form-container h2 {
+      margin-bottom: 24px;
+      color: gold;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: gold;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid #cbd5e0;
+      border-radius: 6px;
+      font-size: 15px;
+      color: #2d3748;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-group input[type="color"] {
+      border: 1px solid #cbd5e0;
+      border-radius: 6px;
+      width: 100%;
+      height: 42px;
+      padding: 4px;
+      cursor: pointer;
+      background: #fff;
+    }
+
+    button {
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      width: 75%;
+      margin: 10px 40px;
+      padding: 10px;
+      font-size: 20px;
+      text-align: center;
+      background: linear-gradient(160deg, gold 0%, rgb(121, 103, 0) 50%);
+      border: 2px solid rgb(77, 65, 0);
+      border-radius: 15px;
+      box-shadow: 0 0 12px gold;
+      transition: 0.5s;
+    }
+
+    button:hover {
+      box-shadow: 0 0 20px gold;
+      transform: scale(1.05);
+    }
+
+    .output {
+      background: transparent;
+      margin-top: 20px;
+      color: gold;
+      padding: 32px;
+      text-align: center;
+      border: 2px solid gold;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      width: 100%;
+      max-width: 400px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="form-container">
+    <h2>User Details Form</h2>
+    <form action="#" method="POST">
+      <div class="form-group">
+        <label>Name:</label>
+        <input type="text" id="name" required placeholder="Enter your full name">
+      </div>
+
+      <div class="form-group">
+        <label>Email:</label>
+        <input type="email" id="email" required placeholder="Enter your email address">
+      </div>
+
+      <div class="form-group">
+        <label>Favourite Colour:</label>
+        <input type="color" id="favColour">
+      </div>
+    </form>
+
+    <div>
+      <button onclick="saveLS()">Save</button>
+      <button onclick="loadLS()">Load</button>
+      <button onclick="DeleteItem()">Delete Email</button>
+      <button onclick="clearLS()">Clear Local Storage</button>
+    </div>
+
+    <div class="output" id="output">Load to see loaded data!</div>
+  </div>
+
+  <script>
+    function saveLS() {
+      let name = document.getElementById("name").value;
+      localStorage.setItem("name", name);
+
+      let email = document.getElementById("email").value;
+      localStorage.setItem("email", email);
+
+      let favColour = document.getElementById("favColour").value;
+      localStorage.setItem("favColour", favColour);
+
+      loadLS();
+      alert("Saved in localStorage");
+    }
+
+    function loadLS() {
+      let name = localStorage.getItem("name")?.trim() || "No value found";
+      let email = localStorage.getItem("email")?.trim() || "No value found";
+      let favColour = localStorage.getItem("favColour")?.trim() || "No value found";
+
+      document.getElementById("output").innerHTML = "Name: " + name + "<br>Email: " + email + "<br>FavColour: " + favColour;
+    }
+
+    function DeleteItem() {
+      localStorage.removeItem("email");
+      loadLS();
+      alert("Email deleted!");
+    }
+
+    function clearLS() {
+      localStorage.clear();
+      loadLS();
+      alert("localStorage cleared");
+    }
+  </script>
+
+</body>
+
+</html>
